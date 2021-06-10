@@ -62,6 +62,7 @@ class AdsInsights(
         adset_name = 'adset_name'
         adset_start = 'adset_start'
         age_targeting = 'age_targeting'
+        attribution_setting = 'attribution_setting'
         auction_bid = 'auction_bid'
         auction_competitiveness = 'auction_competitiveness'
         auction_max_competitor_bid = 'auction_max_competitor_bid'
@@ -92,7 +93,6 @@ class AdsInsights(
         cost_per_inline_post_engagement = 'cost_per_inline_post_engagement'
         cost_per_one_thousand_ad_impression = 'cost_per_one_thousand_ad_impression'
         cost_per_outbound_click = 'cost_per_outbound_click'
-        cost_per_store_visit_action = 'cost_per_store_visit_action'
         cost_per_thruplay = 'cost_per_thruplay'
         cost_per_unique_action_type = 'cost_per_unique_action_type'
         cost_per_unique_click = 'cost_per_unique_click'
@@ -107,6 +107,7 @@ class AdsInsights(
         date_start = 'date_start'
         date_stop = 'date_stop'
         dda_countby_convs = 'dda_countby_convs'
+        dda_results = 'dda_results'
         engagement_rate_ranking = 'engagement_rate_ranking'
         estimated_ad_recall_rate = 'estimated_ad_recall_rate'
         estimated_ad_recall_rate_lower_bound = 'estimated_ad_recall_rate_lower_bound'
@@ -130,6 +131,7 @@ class AdsInsights(
         location = 'location'
         mobile_app_purchase_roas = 'mobile_app_purchase_roas'
         objective = 'objective'
+        optimization_goal = 'optimization_goal'
         outbound_clicks = 'outbound_clicks'
         outbound_clicks_ctr = 'outbound_clicks_ctr'
         place_page_name = 'place_page_name'
@@ -142,7 +144,6 @@ class AdsInsights(
         reach = 'reach'
         social_spend = 'social_spend'
         spend = 'spend'
-        store_visit_actions = 'store_visit_actions'
         unique_actions = 'unique_actions'
         unique_clicks = 'unique_clicks'
         unique_conversions = 'unique_conversions'
@@ -238,7 +239,7 @@ class AdsInsights(
         last_week_mon_sun = 'last_week_mon_sun'
         last_week_sun_sat = 'last_week_sun_sat'
         last_year = 'last_year'
-        lifetime = 'lifetime'
+        maximum = 'maximum'
         this_month = 'this_month'
         this_quarter = 'this_quarter'
         this_week_mon_today = 'this_week_mon_today'
@@ -293,6 +294,7 @@ class AdsInsights(
         'adset_name': 'string',
         'adset_start': 'string',
         'age_targeting': 'string',
+        'attribution_setting': 'string',
         'auction_bid': 'string',
         'auction_competitiveness': 'string',
         'auction_max_competitor_bid': 'string',
@@ -323,7 +325,6 @@ class AdsInsights(
         'cost_per_inline_post_engagement': 'string',
         'cost_per_one_thousand_ad_impression': 'list<AdsActionStats>',
         'cost_per_outbound_click': 'list<AdsActionStats>',
-        'cost_per_store_visit_action': 'list<AdsActionStats>',
         'cost_per_thruplay': 'list<AdsActionStats>',
         'cost_per_unique_action_type': 'list<AdsActionStats>',
         'cost_per_unique_click': 'string',
@@ -338,6 +339,7 @@ class AdsInsights(
         'date_start': 'string',
         'date_stop': 'string',
         'dda_countby_convs': 'string',
+        'dda_results': 'list<Object>',
         'engagement_rate_ranking': 'string',
         'estimated_ad_recall_rate': 'string',
         'estimated_ad_recall_rate_lower_bound': 'string',
@@ -355,12 +357,13 @@ class AdsInsights(
         'inline_post_engagement': 'string',
         'instant_experience_clicks_to_open': 'string',
         'instant_experience_clicks_to_start': 'string',
-        'instant_experience_outbound_clicks': 'string',
+        'instant_experience_outbound_clicks': 'list<AdsActionStats>',
         'interactive_component_tap': 'list<AdsActionStats>',
         'labels': 'string',
         'location': 'string',
         'mobile_app_purchase_roas': 'list<AdsActionStats>',
         'objective': 'string',
+        'optimization_goal': 'string',
         'outbound_clicks': 'list<AdsActionStats>',
         'outbound_clicks_ctr': 'list<AdsActionStats>',
         'place_page_name': 'string',
@@ -373,7 +376,6 @@ class AdsInsights(
         'reach': 'string',
         'social_spend': 'string',
         'spend': 'string',
-        'store_visit_actions': 'list<AdsActionStats>',
         'unique_actions': 'list<AdsActionStats>',
         'unique_clicks': 'string',
         'unique_conversions': 'list<AdsActionStats>',

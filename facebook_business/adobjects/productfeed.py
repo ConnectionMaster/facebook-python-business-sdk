@@ -61,7 +61,7 @@ class ProductFeed(
         feed_type = 'feed_type'
         override_value = 'override_value'
         rules = 'rules'
-        whitelisted_properties = 'whitelisted_properties'
+        selected_override_fields = 'selected_override_fields'
 
     class Delimiter:
         autodetect = 'AUTODETECT'
@@ -87,6 +87,7 @@ class ProductFeed(
 
     class FeedType:
         auto = 'AUTO'
+        automotive_model = 'AUTOMOTIVE_MODEL'
         destination = 'DESTINATION'
         flight = 'FLIGHT'
         home_listing = 'HOME_LISTING'
@@ -248,6 +249,36 @@ class ProductFeed(
             self.assure_call()
             return request.execute()
 
+    def get_auto_markets(self, fields=None, params=None, batch=None, success=None, failure=None, pending=False):
+        from facebook_business.utils import api_utils
+        if batch is None and (success is not None or failure is not None):
+          api_utils.warning('`success` and `failure` callback only work for batch call.')
+        param_types = {
+        }
+        enums = {
+        }
+        request = FacebookRequest(
+            node_id=self['id'],
+            method='GET',
+            endpoint='/auto_markets',
+            api=self._api,
+            param_checker=TypeChecker(param_types, enums),
+            target_class=AbstractCrudObject,
+            api_type='EDGE',
+            response_parser=ObjectParser(target_class=AbstractCrudObject, api=self._api),
+        )
+        request.add_params(params)
+        request.add_fields(fields)
+
+        if batch is not None:
+            request.add_to_batch(batch, success=success, failure=failure)
+            return request
+        elif pending:
+            return request
+        else:
+            self.assure_call()
+            return request.execute()
+
     def get_automotive_models(self, fields=None, params=None, batch=None, success=None, failure=None, pending=False):
         from facebook_business.utils import api_utils
         if batch is None and (success is not None or failure is not None):
@@ -268,6 +299,36 @@ class ProductFeed(
             target_class=AutomotiveModel,
             api_type='EDGE',
             response_parser=ObjectParser(target_class=AutomotiveModel, api=self._api),
+        )
+        request.add_params(params)
+        request.add_fields(fields)
+
+        if batch is not None:
+            request.add_to_batch(batch, success=success, failure=failure)
+            return request
+        elif pending:
+            return request
+        else:
+            self.assure_call()
+            return request.execute()
+
+    def get_autos(self, fields=None, params=None, batch=None, success=None, failure=None, pending=False):
+        from facebook_business.utils import api_utils
+        if batch is None and (success is not None or failure is not None):
+          api_utils.warning('`success` and `failure` callback only work for batch call.')
+        param_types = {
+        }
+        enums = {
+        }
+        request = FacebookRequest(
+            node_id=self['id'],
+            method='GET',
+            endpoint='/autos',
+            api=self._api,
+            param_checker=TypeChecker(param_types, enums),
+            target_class=AbstractCrudObject,
+            api_type='EDGE',
+            response_parser=ObjectParser(target_class=AbstractCrudObject, api=self._api),
         )
         request.add_params(params)
         request.add_fields(fields)
@@ -400,6 +461,38 @@ class ProductFeed(
             target_class=Hotel,
             api_type='EDGE',
             response_parser=ObjectParser(target_class=Hotel, api=self._api),
+        )
+        request.add_params(params)
+        request.add_fields(fields)
+
+        if batch is not None:
+            request.add_to_batch(batch, success=success, failure=failure)
+            return request
+        elif pending:
+            return request
+        else:
+            self.assure_call()
+            return request.execute()
+
+    def get_media_titles(self, fields=None, params=None, batch=None, success=None, failure=None, pending=False):
+        from facebook_business.utils import api_utils
+        if batch is None and (success is not None or failure is not None):
+          api_utils.warning('`success` and `failure` callback only work for batch call.')
+        param_types = {
+            'bulk_pagination': 'bool',
+            'filter': 'Object',
+        }
+        enums = {
+        }
+        request = FacebookRequest(
+            node_id=self['id'],
+            method='GET',
+            endpoint='/media_titles',
+            api=self._api,
+            param_checker=TypeChecker(param_types, enums),
+            target_class=AbstractCrudObject,
+            api_type='EDGE',
+            response_parser=ObjectParser(target_class=AbstractCrudObject, api=self._api),
         )
         request.add_params(params)
         request.add_fields(fields)
@@ -729,7 +822,7 @@ class ProductFeed(
         'feed_type': 'FeedType',
         'override_value': 'string',
         'rules': 'list<string>',
-        'whitelisted_properties': 'list<string>',
+        'selected_override_fields': 'list<string>',
     }
     @classmethod
     def _get_field_enum_info(cls):

@@ -46,6 +46,7 @@ class ProductItem(
         additional_variant_attributes = 'additional_variant_attributes'
         age_group = 'age_group'
         applinks = 'applinks'
+        ar_data = 'ar_data'
         availability = 'availability'
         brand = 'brand'
         capability_to_review_status = 'capability_to_review_status'
@@ -68,10 +69,12 @@ class ProductItem(
         gtin = 'gtin'
         id = 'id'
         image_cdn_urls = 'image_cdn_urls'
+        image_fetch_status = 'image_fetch_status'
         image_url = 'image_url'
         images = 'images'
         inventory = 'inventory'
         manufacturer_part_number = 'manufacturer_part_number'
+        marked_for_product_launch = 'marked_for_product_launch'
         material = 'material'
         mobile_link = 'mobile_link'
         name = 'name'
@@ -83,6 +86,7 @@ class ProductItem(
         product_feed = 'product_feed'
         product_group = 'product_group'
         product_type = 'product_type'
+        quantity_to_sell_on_facebook = 'quantity_to_sell_on_facebook'
         retailer_id = 'retailer_id'
         retailer_product_group_id = 'retailer_product_group_id'
         review_rejection_reasons = 'review_rejection_reasons'
@@ -97,7 +101,6 @@ class ProductItem(
         start_date = 'start_date'
         url = 'url'
         visibility = 'visibility'
-        additional_image_files = 'additional_image_files'
         additional_uploaded_image_ids = 'additional_uploaded_image_ids'
         android_app_name = 'android_app_name'
         android_class = 'android_class'
@@ -155,6 +158,14 @@ class ProductItem(
         male = 'male'
         unisex = 'unisex'
 
+    class ImageFetchStatus:
+        direct_upload = 'DIRECT_UPLOAD'
+        fetched = 'FETCHED'
+        fetch_failed = 'FETCH_FAILED'
+        no_status = 'NO_STATUS'
+        outdated = 'OUTDATED'
+        partial_fetch = 'PARTIAL_FETCH'
+
     class ReviewStatus:
         approved = 'approved'
         outdated = 'outdated'
@@ -181,6 +192,7 @@ class ProductItem(
         fb_aprl_clothing = 'FB_APRL_CLOTHING'
         fb_aprl_costume = 'FB_APRL_COSTUME'
         fb_aprl_cstm = 'FB_APRL_CSTM'
+        fb_aprl_formal = 'FB_APRL_FORMAL'
         fb_aprl_handbag = 'FB_APRL_HANDBAG'
         fb_aprl_jewelry = 'FB_APRL_JEWELRY'
         fb_aprl_shoe = 'FB_APRL_SHOE'
@@ -375,6 +387,11 @@ class ProductItem(
         fb_vehi = 'FB_VEHI'
         fb_vehi_part = 'FB_VEHI_PART'
 
+    class MarkedForProductLaunch:
+        value_default = 'default'
+        marked = 'marked'
+        not_marked = 'not_marked'
+
     # @deprecated get_endpoint function is deprecated
     @classmethod
     def get_endpoint(cls):
@@ -420,8 +437,11 @@ class ProductItem(
         if batch is None and (success is not None or failure is not None):
           api_utils.warning('`success` and `failure` callback only work for batch call.')
         param_types = {
+            'catalog_id': 'string',
             'image_height': 'unsigned int',
             'image_width': 'unsigned int',
+            'override_country': 'string',
+            'override_language': 'string',
         }
         enums = {
         }
@@ -452,7 +472,6 @@ class ProductItem(
         if batch is None and (success is not None or failure is not None):
           api_utils.warning('`success` and `failure` callback only work for batch call.')
         param_types = {
-            'additional_image_files': 'list<file>',
             'additional_image_urls': 'list<string>',
             'additional_uploaded_image_ids': 'list<string>',
             'additional_variant_attributes': 'map',
@@ -493,6 +512,7 @@ class ProductItem(
             'iphone_url': 'string',
             'launch_date': 'string',
             'manufacturer_part_number': 'string',
+            'marked_for_product_launch': 'marked_for_product_launch_enum',
             'material': 'string',
             'mobile_link': 'string',
             'name': 'string',
@@ -503,6 +523,7 @@ class ProductItem(
             'pattern': 'string',
             'price': 'unsigned int',
             'product_type': 'string',
+            'quantity_to_sell_on_facebook': 'unsigned int',
             'retailer_id': 'string',
             'return_policy_days': 'unsigned int',
             'sale_price': 'unsigned int',
@@ -522,6 +543,7 @@ class ProductItem(
             'commerce_tax_category_enum': ProductItem.CommerceTaxCategory.__dict__.values(),
             'condition_enum': ProductItem.Condition.__dict__.values(),
             'gender_enum': ProductItem.Gender.__dict__.values(),
+            'marked_for_product_launch_enum': ProductItem.MarkedForProductLaunch.__dict__.values(),
             'visibility_enum': ProductItem.Visibility.__dict__.values(),
         }
         request = FacebookRequest(
@@ -533,42 +555,6 @@ class ProductItem(
             target_class=ProductItem,
             api_type='NODE',
             response_parser=ObjectParser(reuse_object=self),
-        )
-        request.add_params(params)
-        request.add_fields(fields)
-
-        if batch is not None:
-            request.add_to_batch(batch, success=success, failure=failure)
-            return request
-        elif pending:
-            return request
-        else:
-            self.assure_call()
-            return request.execute()
-
-    def create_ar_datum(self, fields=None, params=None, batch=None, success=None, failure=None, pending=False):
-        from facebook_business.utils import api_utils
-        if batch is None and (success is not None or failure is not None):
-          api_utils.warning('`success` and `failure` callback only work for batch call.')
-        param_types = {
-            'container_effect': 'container_effect_enum',
-            'effect_parameters': 'map',
-            'picker_icon': 'file',
-        }
-        enums = {
-            'container_effect_enum': [
-                'MAKEUP',
-            ],
-        }
-        request = FacebookRequest(
-            node_id=self['id'],
-            method='POST',
-            endpoint='/ar_data',
-            api=self._api,
-            param_checker=TypeChecker(param_types, enums),
-            target_class=AbstractCrudObject,
-            api_type='EDGE',
-            response_parser=ObjectParser(target_class=AbstractCrudObject, api=self._api),
         )
         request.add_params(params)
         request.add_fields(fields)
@@ -650,6 +636,7 @@ class ProductItem(
         'additional_variant_attributes': 'map<string, string>',
         'age_group': 'AgeGroup',
         'applinks': 'CatalogItemAppLinks',
+        'ar_data': 'ProductItemARData',
         'availability': 'Availability',
         'brand': 'string',
         'capability_to_review_status': 'map<Object, Object>',
@@ -672,10 +659,12 @@ class ProductItem(
         'gtin': 'string',
         'id': 'string',
         'image_cdn_urls': 'map<string, string>',
+        'image_fetch_status': 'ImageFetchStatus',
         'image_url': 'string',
         'images': 'list<string>',
         'inventory': 'int',
         'manufacturer_part_number': 'string',
+        'marked_for_product_launch': 'string',
         'material': 'string',
         'mobile_link': 'string',
         'name': 'string',
@@ -687,6 +676,7 @@ class ProductItem(
         'product_feed': 'ProductFeed',
         'product_group': 'ProductGroup',
         'product_type': 'string',
+        'quantity_to_sell_on_facebook': 'int',
         'retailer_id': 'string',
         'retailer_product_group_id': 'string',
         'review_rejection_reasons': 'list<string>',
@@ -701,7 +691,6 @@ class ProductItem(
         'start_date': 'string',
         'url': 'string',
         'visibility': 'Visibility',
-        'additional_image_files': 'list<file>',
         'additional_uploaded_image_ids': 'list<string>',
         'android_app_name': 'string',
         'android_class': 'string',
@@ -734,10 +723,12 @@ class ProductItem(
         field_enum_info['Availability'] = ProductItem.Availability.__dict__.values()
         field_enum_info['Condition'] = ProductItem.Condition.__dict__.values()
         field_enum_info['Gender'] = ProductItem.Gender.__dict__.values()
+        field_enum_info['ImageFetchStatus'] = ProductItem.ImageFetchStatus.__dict__.values()
         field_enum_info['ReviewStatus'] = ProductItem.ReviewStatus.__dict__.values()
         field_enum_info['ShippingWeightUnit'] = ProductItem.ShippingWeightUnit.__dict__.values()
         field_enum_info['Visibility'] = ProductItem.Visibility.__dict__.values()
         field_enum_info['CommerceTaxCategory'] = ProductItem.CommerceTaxCategory.__dict__.values()
+        field_enum_info['MarkedForProductLaunch'] = ProductItem.MarkedForProductLaunch.__dict__.values()
         return field_enum_info
 
 

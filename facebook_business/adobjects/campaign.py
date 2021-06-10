@@ -124,7 +124,7 @@ class Campaign(
         last_week_mon_sun = 'last_week_mon_sun'
         last_week_sun_sat = 'last_week_sun_sat'
         last_year = 'last_year'
-        lifetime = 'lifetime'
+        maximum = 'maximum'
         this_month = 'this_month'
         this_quarter = 'this_quarter'
         this_week_mon_today = 'this_week_mon_today'
@@ -147,7 +147,6 @@ class Campaign(
         local_awareness = 'LOCAL_AWARENESS'
         messages = 'MESSAGES'
         offer_claims = 'OFFER_CLAIMS'
-        outcome_leads = 'OUTCOME_LEADS'
         page_likes = 'PAGE_LIKES'
         post_engagement = 'POST_ENGAGEMENT'
         product_catalog_sales = 'PRODUCT_CATALOG_SALES'
@@ -498,7 +497,7 @@ class Campaign(
                 'last_week_mon_sun',
                 'last_week_sun_sat',
                 'last_year',
-                'lifetime',
+                'maximum',
                 'this_month',
                 'this_quarter',
                 'this_week_mon_today',
@@ -554,7 +553,9 @@ class Campaign(
             'special_ad_category': 'special_ad_category_enum',
             'special_ad_category_country': 'list<special_ad_category_country_enum>',
             'spend_cap': 'unsigned int',
+            'start_time': 'datetime',
             'status': 'status_enum',
+            'stop_time': 'datetime',
             'upstream_events': 'map',
         }
         enums = {

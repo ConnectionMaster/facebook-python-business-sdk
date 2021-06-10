@@ -53,8 +53,10 @@ class AdgroupPlacementSpecificReviewFeedback(
         dri_counterfeit = 'dri_counterfeit'
         facebook = 'facebook'
         facebook_pages_live_shopping = 'facebook_pages_live_shopping'
+        independent_work = 'independent_work'
         instagram = 'instagram'
         instagram_shop = 'instagram_shop'
+        job_search = 'job_search'
         lead_gen_honeypot = 'lead_gen_honeypot'
         marketplace = 'marketplace'
         marketplace_home_rentals = 'marketplace_home_rentals'
@@ -87,8 +89,10 @@ class AdgroupPlacementSpecificReviewFeedback(
         'dri_counterfeit': 'map<string, string>',
         'facebook': 'map<string, string>',
         'facebook_pages_live_shopping': 'map<string, string>',
+        'independent_work': 'map<string, string>',
         'instagram': 'map<string, string>',
         'instagram_shop': 'map<string, string>',
+        'job_search': 'map<string, string>',
         'lead_gen_honeypot': 'map<string, string>',
         'marketplace': 'map<string, string>',
         'marketplace_home_rentals': 'map<string, string>',

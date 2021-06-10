@@ -50,11 +50,11 @@ class CatalogSubVerticalList(
         clo_offer = 'clo_offer'
         clothing = 'clothing'
         clothing_accessories = 'clothing_accessories'
-        clothing_group = 'clothing_group'
         computer_components = 'computer_components'
         computers_and_tablets = 'computers_and_tablets'
         computers_laptops_and_tablets = 'computers_laptops_and_tablets'
         diapering_and_potty_training = 'diapering_and_potty_training'
+        digital_product_offer = 'digital_product_offer'
         electronic_accessories_and_cables = 'electronic_accessories_and_cables'
         electronics_accessories = 'electronics_accessories'
         furniture = 'furniture'
@@ -64,6 +64,8 @@ class CatalogSubVerticalList(
         household_and_cleaning_supplies = 'household_and_cleaning_supplies'
         jewelry = 'jewelry'
         large_appliances = 'large_appliances'
+        local_service_business_item = 'local_service_business_item'
+        local_service_business_restaurant = 'local_service_business_restaurant'
         loyalty_offer = 'loyalty_offer'
         meetup_space = 'meetup_space'
         nursery = 'nursery'
@@ -104,11 +106,11 @@ class CatalogSubVerticalList(
         'clo_offer': 'Object',
         'clothing': 'Object',
         'clothing_accessories': 'Object',
-        'clothing_group': 'Object',
         'computer_components': 'Object',
         'computers_and_tablets': 'Object',
         'computers_laptops_and_tablets': 'Object',
         'diapering_and_potty_training': 'Object',
+        'digital_product_offer': 'Object',
         'electronic_accessories_and_cables': 'Object',
         'electronics_accessories': 'Object',
         'furniture': 'Object',
@@ -118,6 +120,8 @@ class CatalogSubVerticalList(
         'household_and_cleaning_supplies': 'Object',
         'jewelry': 'Object',
         'large_appliances': 'Object',
+        'local_service_business_item': 'Object',
+        'local_service_business_restaurant': 'Object',
         'loyalty_offer': 'Object',
         'meetup_space': 'Object',
         'nursery': 'Object',
